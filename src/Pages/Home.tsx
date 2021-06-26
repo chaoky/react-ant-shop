@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import MainLayout, { sort_ } from '../Layout';
 import { addToCart, ShopItem } from '../store';
+const images = import.meta.globEager('../assets/*.png');
 
 export default function Home() {
   const items = useAppSelector((s) => s.appState.items);
@@ -88,7 +89,7 @@ function StoreItem(props: { item: ShopItem }) {
     <Card
       style={{ width: '11em', justifySelf: 'center' }}
       hoverable
-      cover={<img src={`/src/assets/${item.image}`} alt="" />}
+      cover={<img src={images[`../assets/${item.image}`].default} alt="" />}
       actions={[
         <ShoppingCartOutlined onClick={() => dispatch(addToCart(item.id))} />,
         <Space>
