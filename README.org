@@ -1,0 +1,7 @@
+* React Shop with Ant and Redux 
+*** https://shop.lordie.moe/
+*** dev
+#+begin_src bash
+~ pnpm install
+~ pnpm run dev
+#+end_src
