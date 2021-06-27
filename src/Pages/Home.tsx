@@ -57,7 +57,7 @@ export default function Home() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            margin: '1.5em 0',
+            margin: '3em 0',
           }}>
           <Title level={4}>Items</Title>
           <Space>
@@ -86,6 +86,7 @@ export default function Home() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(11em, 1fr))',
+            justifyItems: 'center',
           }}>
           {filterFn(items).map((e) => (
             <StoreItem item={e} key={e.id} />
@@ -102,7 +103,7 @@ function StoreItem(props: { item: ShopItem }) {
   const { item } = props;
   return (
     <Card
-      style={{ width: '11em', justifySelf: 'center' }}
+      style={{ width: '11em', marginBottom: '3em' }}
       hoverable
       cover={<img src={images[`../assets/${item.image}`].default} alt="" />}
       actions={[
