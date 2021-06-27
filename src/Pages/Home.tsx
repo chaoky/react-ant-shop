@@ -4,7 +4,7 @@ import {
   ShoppingCartOutlined,
   UpOutlined,
 } from '@ant-design/icons';
-import { Button, Card, Space, Typography } from 'antd';
+import { Button, Card, Space, Typography, ButtonProps } from 'antd';
 import React, { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -61,9 +61,24 @@ export default function Home() {
           }}>
           <Title level={4}>Items</Title>
           <Space>
-            <SortButton onClick={() => setSort_('score')} title="Score" />
-            <SortButton onClick={() => setSort_('name')} title="A-z" />
-            <SortButton onClick={() => setSort_('price')} title="Price" />
+            <SortButton
+              active={sort.active == 'score'}
+              order={sort.score}
+              onClick={() => setSort_('score')}
+              title="Score"
+            />
+            <SortButton
+              active={sort.active == 'name'}
+              order={sort.name}
+              onClick={() => setSort_('name')}
+              title="A-z"
+            />
+            <SortButton
+              active={sort.active == 'price'}
+              order={sort.price}
+              onClick={() => setSort_('price')}
+              title="Price"
+            />
           </Space>
         </div>
 
@@ -102,14 +117,25 @@ function StoreItem(props: { item: ShopItem }) {
   );
 }
 
-function SortButton({ title, onClick }: { title: string; onClick: () => void }) {
+interface SortButton extends ButtonProps {
+  active: boolean;
+  order: boolean;
+  title: string;
+}
+function SortButton(props: SortButton) {
+  const { title, active, order, ...others } = props;
+
   return (
-    <Button size="large" onClick={onClick}>
+    <Button size="large" {...others}>
       <div style={{ display: 'flex', gap: '10px' }}>
         <div
           style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <UpOutlined style={{ fontSize: '10px' }} />
-          <DownOutlined style={{ fontSize: '10px' }} />
+          <UpOutlined
+            style={{ fontSize: '10px', color: active && !order ? 'blue' : undefined }}
+          />
+          <DownOutlined
+            style={{ fontSize: '10px', color: active && order ? 'blue' : undefined }}
+          />
         </div>
         {title}
       </div>
