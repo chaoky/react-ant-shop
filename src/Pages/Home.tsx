@@ -31,7 +31,7 @@ export default function Home() {
     switch (sort.active) {
       case 'name':
         sort_(t, (a, b) =>
-          a.name.toLowerCase() < b.name.toLowerCase() ? !sort.name : sort.name,
+          a.name.toLowerCase() > b.name.toLowerCase() ? !sort.name : sort.name,
         );
         break;
       case 'price':
