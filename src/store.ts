@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import allProducs from './products';
+import ShopCart from './SideBar';
 
 interface AppState {
   items: ShopItem[];
@@ -23,9 +24,10 @@ export interface ShopItem {
   image: string;
 }
 
+const emptyCart = { items: [], total: 0, shippingFee: 0, freeShipping: false };
 const initialState: AppState = {
   items: allProducs,
-  shopCart: { items: [], total: 0, shippingFee: 0, freeShipping: false },
+  shopCart: emptyCart,
 };
 
 export const appState = createSlice({
@@ -34,7 +36,7 @@ export const appState = createSlice({
   //immer
   reducers: {
     addToCart: (state, action: PayloadAction<number>) => {
-      let { shopCart } = state;
+      const { shopCart } = state;
 
       if (!shopCart.items[action.payload])
         shopCart.items[action.payload] = { ammomunt: 0 };
@@ -57,6 +59,9 @@ export const appState = createSlice({
 
       if (shopCart.total < 250) shopCart.freeShipping = false;
     },
+    clearCart: (state) => {
+      state.shopCart = emptyCart;
+    },
   },
 });
 
@@ -66,7 +71,7 @@ export const store = configureStore({
   },
 });
 
-export const { addToCart, removeFromCart } = appState.actions;
+export const { addToCart, removeFromCart, clearCart } = appState.actions;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const selectCount = (state: RootState) => state.appState;

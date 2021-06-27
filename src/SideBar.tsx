@@ -3,9 +3,10 @@ import { Button, Layout, List, PageHeader, Space, Statistic, Typography } from '
 import React, { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from './hooks';
-import { removeFromCart } from './store';
+import { removeFromCart, clearCart } from './store';
 
 export default function ShopCart() {
+  const dispatch = useAppDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const [bigCart, setBigCart] = useState(false);
   const state = useAppSelector((s) => ({
@@ -37,7 +38,7 @@ export default function ShopCart() {
         title="Cart"
         subTitle="Shop away"
         extra={[
-          <Button danger key="2">
+          <Button danger key="2" onClick={() => dispatch(clearCart())}>
             Clear
           </Button>,
           <Button type="primary" key="1">
