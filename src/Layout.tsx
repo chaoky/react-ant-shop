@@ -1,6 +1,6 @@
 import { AutoComplete, Input, Layout } from 'antd';
 import React, { useState } from 'react';
-
+import { css } from '@emotion/css';
 import { ShopItem } from './store';
 
 export default function MainLayout(props: {
@@ -22,7 +22,21 @@ export default function MainLayout(props: {
           <ItemSearchBar items={items} onSearch={(e) => onSearch(e)} />
         </div>
       </Layout.Header>
-      <div style={{ overflowY: 'auto', overflowX: 'hidden' }}>
+      <div
+        className={css({
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          '::-webkit-scrollbar': {
+            width: '6px',
+          },
+          '::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgba(0,0,0,1)',
+            borderRadius: '6px',
+          },
+          '::-webkit-scrollbar-track': {
+            backgroundColor: 'rgba(0,0,0,0.1)',
+          },
+        })}>
         <div style={{ margin: '1em' }}>{children}</div>
         <Footer style={{ textAlign: 'center' }}>Lordie Ant Design React</Footer>
       </div>
