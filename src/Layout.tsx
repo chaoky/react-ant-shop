@@ -13,7 +13,7 @@ export default function MainLayout(props: {
   const { items, onSearch } = props;
 
   return (
-    <Layout>
+    <Layout style={{ overflowX: 'hidden' }}>
       <Layout.Header>
         <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <span style={{ fontSize: '1.5em', color: 'white', marginRight: '10%' }}>
@@ -24,7 +24,6 @@ export default function MainLayout(props: {
       </Layout.Header>
       <div
         className={css({
-          overflowX: 'hidden',
           overflowY: 'auto',
           '::-webkit-scrollbar': {
             width: '6px',
